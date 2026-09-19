@@ -1,0 +1,3876 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta name="theme-color" content="#02030b">
+
+<title>DELTA WEB — Ensiklopedia Astronomi & Antariksa</title>
+
+<style>
+/* =========================================================
+   DELTA WEB
+   ENSIKLOPEDIA ASTRONOMI & ANTARIKSA
+   SINGLE FILE
+   ========================================================= */
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    scroll-behavior:smooth;
+}
+
+:root{
+    --bg:#02030a;
+    --bg2:#060914;
+    --card:rgba(255,255,255,.055);
+    --card2:rgba(8,14,34,.86);
+    --border:rgba(255,255,255,.12);
+
+    --white:#f5f7ff;
+    --muted:#aab3d0;
+
+    --cyan:#00eaff;
+    --blue:#4d7cff;
+    --purple:#8b5cf6;
+    --pink:#ff3cac;
+    --orange:#ff8b17;
+    --yellow:#ffd166;
+    --green:#36e29a;
+    --red:#ff4d6d;
+
+    --shadow:0 25px 80px rgba(0,0,0,.5);
+}
+
+html{
+    background:var(--bg);
+}
+
+body{
+    font-family:
+        Inter,
+        system-ui,
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        Arial,
+        sans-serif;
+
+    color:var(--white);
+    background:
+        radial-gradient(circle at 15% 5%,rgba(77,124,255,.15),transparent 27%),
+        radial-gradient(circle at 90% 20%,rgba(139,92,246,.13),transparent 28%),
+        radial-gradient(circle at 50% 90%,rgba(0,234,255,.06),transparent 30%),
+        var(--bg);
+
+    line-height:1.7;
+    overflow-x:hidden;
+}
+
+/* =========================================================
+   STAR FIELD
+   ========================================================= */
+
+body::before{
+    content:"";
+    position:fixed;
+    inset:0;
+    pointer-events:none;
+    z-index:-10;
+
+    background-image:
+        radial-gradient(1px 1px at 5% 10%,#fff,transparent),
+        radial-gradient(1px 1px at 13% 60%,#fff,transparent),
+        radial-gradient(2px 2px at 25% 25%,#fff,transparent),
+        radial-gradient(1px 1px at 34% 80%,#fff,transparent),
+        radial-gradient(2px 2px at 45% 15%,#fff,transparent),
+        radial-gradient(1px 1px at 53% 50%,#fff,transparent),
+        radial-gradient(2px 2px at 66% 30%,#fff,transparent),
+        radial-gradient(1px 1px at 76% 75%,#fff,transparent),
+        radial-gradient(2px 2px at 88% 18%,#fff,transparent),
+        radial-gradient(1px 1px at 94% 70%,#fff,transparent);
+
+    background-size:500px 500px;
+    opacity:.7;
+    animation:stars 70s linear infinite;
+}
+
+@keyframes stars{
+    from{transform:translateY(0)}
+    to{transform:translateY(500px)}
+}
+
+/* =========================================================
+   NAVBAR
+   ========================================================= */
+
+nav{
+    position:fixed;
+    top:0;
+    left:0;
+    width:100%;
+    z-index:9999;
+
+    padding:15px 6%;
+
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+
+    background:rgba(2,3,10,.72);
+    backdrop-filter:blur(22px);
+
+    border-bottom:1px solid var(--border);
+}
+
+.logo{
+    font-size:23px;
+    font-weight:1000;
+    letter-spacing:4px;
+
+    background:
+        linear-gradient(
+            90deg,
+            var(--cyan),
+            var(--blue),
+            var(--purple),
+            var(--pink)
+        );
+
+    -webkit-background-clip:text;
+    color:transparent;
+}
+
+nav ul{
+    display:flex;
+    list-style:none;
+    gap:20px;
+}
+
+nav a{
+    color:#dfe5ff;
+    text-decoration:none;
+    font-size:12px;
+    transition:.3s;
+}
+
+nav a:hover{
+    color:var(--cyan);
+    text-shadow:0 0 15px var(--cyan);
+}
+
+.menu{
+    display:none;
+    font-size:28px;
+    cursor:pointer;
+}
+
+/* =========================================================
+   HERO
+   ========================================================= */
+
+.hero{
+    min-height:100vh;
+    padding:130px 7% 100px;
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    text-align:center;
+    position:relative;
+    overflow:hidden;
+}
+
+.heroContent{
+    max-width:1000px;
+}
+
+.status{
+    display:inline-flex;
+    align-items:center;
+    gap:9px;
+
+    padding:8px 17px;
+    border-radius:50px;
+
+    color:var(--cyan);
+    border:1px solid rgba(0,234,255,.35);
+    background:rgba(0,234,255,.06);
+
+    font-size:11px;
+    letter-spacing:2px;
+    margin-bottom:25px;
+}
+
+.status i{
+    width:7px;
+    height:7px;
+    border-radius:50%;
+    background:#37ffad;
+    box-shadow:0 0 15px #37ffad;
+    animation:pulse 1.5s infinite;
+}
+
+@keyframes pulse{
+    50%{
+        transform:scale(1.7);
+        opacity:.4;
+    }
+}
+
+.hero h1{
+    font-size:clamp(50px,9vw,120px);
+    line-height:.9;
+    letter-spacing:-6px;
+    margin-bottom:30px;
+}
+
+.gradient{
+    background:
+        linear-gradient(
+            90deg,
+            #fff,
+            #75efff,
+            #687cff,
+            #b46cff,
+            #ff65c9
+        );
+
+    -webkit-background-clip:text;
+    color:transparent;
+}
+
+.hero p{
+    max-width:820px;
+    margin:auto;
+    color:var(--muted);
+    font-size:17px;
+    line-height:1.9;
+}
+
+.heroButtons{
+    margin-top:35px;
+
+    display:flex;
+    justify-content:center;
+    gap:14px;
+    flex-wrap:wrap;
+}
+
+.btn{
+    padding:13px 23px;
+    border-radius:50px;
+
+    border:1px solid var(--border);
+    color:#fff;
+    text-decoration:none;
+    font-weight:700;
+
+    transition:.35s;
+}
+
+.btn.primary{
+    background:
+        linear-gradient(
+            90deg,
+            var(--blue),
+            var(--purple)
+        );
+
+    box-shadow:0 0 35px rgba(77,124,255,.3);
+}
+
+.btn:hover{
+    transform:translateY(-5px);
+    box-shadow:0 15px 40px rgba(0,0,0,.4);
+}
+
+/* =========================================================
+   FLOATING SPACE OBJECTS
+   ========================================================= */
+
+.orb{
+    position:absolute;
+    border-radius:50%;
+    pointer-events:none;
+}
+
+.orb.one{
+    width:150px;
+    height:150px;
+    left:6%;
+    bottom:13%;
+
+    background:
+        radial-gradient(
+            circle at 30% 30%,
+            #fff,
+            #32c9ff 25%,
+            #3948ff 60%,
+            transparent 72%
+        );
+
+    box-shadow:0 0 70px rgba(0,234,255,.35);
+    animation:float 6s ease-in-out infinite;
+}
+
+.orb.two{
+    width:95px;
+    height:95px;
+    right:8%;
+    top:24%;
+
+    background:
+        radial-gradient(
+            circle at 30% 30%,
+            #fff,
+            #ff9b30 20%,
+            #ff3c9d 60%,
+            transparent 72%
+        );
+
+    box-shadow:0 0 60px rgba(255,60,172,.3);
+    animation:float 5s ease-in-out infinite reverse;
+}
+
+@keyframes float{
+    50%{
+        transform:translateY(-25px) rotate(10deg);
+    }
+}
+
+/* =========================================================
+   SECTIONS
+   ========================================================= */
+
+section{
+    padding:105px 7%;
+}
+
+.container{
+    max-width:1200px;
+    margin:auto;
+}
+
+.sectionTitle{
+    text-align:center;
+    max-width:900px;
+    margin:0 auto 55px;
+}
+
+.sectionTitle .number{
+    color:var(--cyan);
+    font-size:11px;
+    letter-spacing:4px;
+}
+
+.sectionTitle h2{
+    font-size:clamp(34px,5vw,60px);
+    line-height:1.05;
+    margin:12px 0;
+}
+
+.sectionTitle p{
+    color:var(--muted);
+}
+
+/* =========================================================
+   GLASS CARD
+   ========================================================= */
+
+.grid{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:20px;
+}
+
+.card{
+    position:relative;
+    padding:29px;
+
+    border-radius:25px;
+    background:var(--card);
+    border:1px solid var(--border);
+
+    backdrop-filter:blur(16px);
+    overflow:hidden;
+
+    transition:.4s;
+}
+
+.card::before{
+    content:"";
+    position:absolute;
+
+    width:130px;
+    height:130px;
+
+    right:-45px;
+    top:-45px;
+
+    border-radius:50%;
+    background:var(--cyan);
+    filter:blur(70px);
+    opacity:.07;
+}
+
+.card:hover{
+    transform:translateY(-8px);
+    border-color:rgba(0,234,255,.4);
+    box-shadow:var(--shadow);
+}
+
+.cardIcon{
+    font-size:40px;
+    margin-bottom:13px;
+}
+
+.card h3{
+    font-size:21px;
+    margin-bottom:10px;
+}
+
+.card p{
+    color:var(--muted);
+    font-size:14px;
+    line-height:1.85;
+}
+
+/* =========================================================
+   ARTICLE
+   ========================================================= */
+
+.article{
+    max-width:1080px;
+    margin:auto;
+
+    padding:42px;
+
+    border-radius:30px;
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(255,255,255,.055),
+            rgba(255,255,255,.02)
+        );
+
+    border:1px solid var(--border);
+
+    box-shadow:0 30px 80px rgba(0,0,0,.23);
+}
+
+.article h3{
+    color:var(--cyan);
+    font-size:25px;
+    margin:35px 0 13px;
+}
+
+.article h3:first-child{
+    margin-top:0;
+}
+
+.article p{
+    color:#bac2dd;
+    margin-bottom:18px;
+    line-height:2;
+}
+
+.article strong{
+    color:#fff;
+}
+
+.article ul{
+    color:#bac2dd;
+    padding-left:25px;
+    line-height:2;
+}
+
+.info{
+    padding:20px;
+    margin:25px 0;
+
+    border-left:3px solid var(--cyan);
+    background:rgba(0,234,255,.045);
+    border-radius:10px;
+}
+
+.warning{
+    border-left-color:var(--orange);
+    background:rgba(255,139,23,.05);
+}
+
+/* =========================================================
+   MOVING REFERENCES
+   ========================================================= */
+
+.referenceBox{
+    overflow:hidden;
+    padding:17px 0;
+
+    border-top:1px solid var(--border);
+    border-bottom:1px solid var(--border);
+
+    background:rgba(0,234,255,.035);
+    white-space:nowrap;
+}
+
+.referenceTrack{
+    display:inline-flex;
+    gap:45px;
+    min-width:max-content;
+
+    animation:referenceMove 38s linear infinite;
+}
+
+.referenceTrack:hover{
+    animation-play-state:paused;
+}
+
+.referenceItem{
+    color:#cdd5f2;
+    font-size:13px;
+}
+
+.referenceItem span{
+    color:var(--cyan);
+    margin-right:7px;
+}
+
+@keyframes referenceMove{
+    from{transform:translateX(0)}
+    to{transform:translateX(-50%)}
+}
+
+/* =========================================================
+   SOLAR SYSTEM ANIMATION
+   ========================================================= */
+
+.solarSystem{
+    height:650px;
+    position:relative;
+    overflow:hidden;
+
+    border-radius:35px;
+    border:1px solid var(--border);
+
+    background:
+        radial-gradient(
+            circle at center,
+            rgba(255,150,0,.05),
+            transparent 15%
+        ),
+        #010207;
+}
+
+.sun{
+    position:absolute;
+    left:50%;
+    top:50%;
+
+    width:90px;
+    height:90px;
+
+    transform:translate(-50%,-50%);
+
+    border-radius:50%;
+
+    background:
+        radial-gradient(
+            circle at 35% 30%,
+            #fff,
+            #fff3a0 12%,
+            #ffcf33 32%,
+            #ff7b00 65%,
+            #ff3b00
+        );
+
+    box-shadow:
+        0 0 25px #ffb300,
+        0 0 70px #ff7800,
+        0 0 130px rgba(255,120,0,.35);
+
+    z-index:5;
+
+    animation:sunPulse 3s ease-in-out infinite;
+}
+
+@keyframes sunPulse{
+    50%{
+        box-shadow:
+            0 0 35px #ffb300,
+            0 0 85px #ff7800,
+            0 0 160px rgba(255,120,0,.4);
+    }
+}
+
+.sunLabel{
+    position:absolute;
+    left:50%;
+    top:calc(50% + 65px);
+    transform:translateX(-50%);
+
+    color:#ffd978;
+    font-size:11px;
+    letter-spacing:2px;
+}
+
+.orbit{
+    position:absolute;
+    left:50%;
+    top:50%;
+
+    transform:translate(-50%,-50%);
+    border:1px solid rgba(255,255,255,.11);
+    border-radius:50%;
+}
+
+.orbit1{width:150px;height:150px}
+.orbit2{width:210px;height:210px}
+.orbit3{width:275px;height:275px}
+.orbit4{width:345px;height:345px}
+.orbit5{width:435px;height:435px}
+.orbit6{width:520px;height:520px}
+.orbit7{width:600px;height:600px}
+.orbit8{width:680px;height:680px}
+
+.planetOrbit{
+    position:absolute;
+    left:50%;
+    top:50%;
+
+    transform:translate(-50%,-50%);
+
+    border-radius:50%;
+    animation:orbit linear infinite;
+}
+
+.planet{
+    position:absolute;
+    top:50%;
+    left:100%;
+
+    transform:translate(-50%,-50%);
+
+    border-radius:50%;
+}
+
+.mercuryOrbit{
+    width:150px;
+    height:150px;
+    animation-duration:5s;
+}
+
+.mercury{
+    width:9px;
+    height:9px;
+    background:#aaa;
+    box-shadow:0 0 10px #aaa;
+}
+
+.venusOrbit{
+    width:210px;
+    height:210px;
+    animation-duration:8s;
+}
+
+.venus{
+    width:16px;
+    height:16px;
+    background:#dba65c;
+    box-shadow:0 0 13px #dba65c;
+}
+
+.earthOrbit{
+    width:275px;
+    height:275px;
+    animation-duration:11s;
+}
+
+.earth{
+    width:18px;
+    height:18px;
+
+    background:
+        radial-gradient(
+            circle at 35% 35%,
+            #65c8ff,
+            #2364d8 50%,
+            #123b92
+        );
+
+    box-shadow:0 0 15px #318cff;
+}
+
+.marsOrbit{
+    width:345px;
+    height:345px;
+    animation-duration:15s;
+}
+
+.mars{
+    width:14px;
+    height:14px;
+    background:#d64b31;
+    box-shadow:0 0 13px #ff5032;
+}
+
+.jupiterOrbit{
+    width:435px;
+    height:435px;
+    animation-duration:23s;
+}
+
+.jupiter{
+    width:31px;
+    height:31px;
+
+    background:
+        linear-gradient(
+            180deg,
+            #d9b38c 0 15%,
+            #8b6045 15% 28%,
+            #e1c49e 28% 40%,
+            #8c5c46 40% 53%,
+            #d8b68d 53% 75%,
+            #7c5141 75%
+        );
+
+    box-shadow:0 0 15px rgba(230,190,150,.4);
+}
+
+.saturnOrbit{
+    width:520px;
+    height:520px;
+    animation-duration:29s;
+}
+
+.saturn{
+    width:27px;
+    height:27px;
+    background:#d6b56c;
+}
+
+.saturn::after{
+    content:"";
+    position:absolute;
+
+    width:43px;
+    height:13px;
+
+    left:50%;
+    top:50%;
+
+    transform:
+        translate(-50%,-50%)
+        rotate(-15deg);
+
+    border:2px solid rgba(231,202,130,.7);
+    border-radius:50%;
+}
+
+.uranusOrbit{
+    width:600px;
+    height:600px;
+    animation-duration:36s;
+}
+
+.uranus{
+    width:21px;
+    height:21px;
+    background:#79dce8;
+}
+
+.neptuneOrbit{
+    width:680px;
+    height:680px;
+    animation-duration:44s;
+}
+
+.neptune{
+    width:20px;
+    height:20px;
+    background:#376bdc;
+    box-shadow:0 0 15px #376bdc;
+}
+
+@keyframes orbit{
+    from{
+        transform:
+            translate(-50%,-50%)
+            rotate(0deg);
+    }
+
+    to{
+        transform:
+            translate(-50%,-50%)
+            rotate(360deg);
+    }
+}
+
+.planetLegend{
+    position:absolute;
+    left:20px;
+    bottom:20px;
+
+    padding:13px 17px;
+
+    background:rgba(2,3,10,.75);
+    backdrop-filter:blur(10px);
+
+    border:1px solid var(--border);
+    border-radius:15px;
+
+    color:var(--muted);
+    font-size:11px;
+}
+
+/* =========================================================
+   BLACK HOLE
+   ========================================================= */
+
+.blackHole{
+    min-height:620px;
+
+    position:relative;
+    overflow:hidden;
+
+    border-radius:35px;
+
+    border:1px solid rgba(139,92,246,.35);
+
+    background:
+        radial-gradient(
+            circle at center,
+            #000 0 9%,
+            #15071e 10%,
+            #522080 15%,
+            #ff7200 21%,
+            #ffc13b 25%,
+            #7c2894 31%,
+            #170724 40%,
+            transparent 63%
+        ),
+        #010106;
+
+    box-shadow:
+        inset 0 0 160px #000,
+        0 0 100px rgba(139,92,246,.15);
+}
+
+.blackHole::before{
+    content:"";
+
+    position:absolute;
+
+    width:570px;
+    height:190px;
+
+    left:50%;
+    top:50%;
+
+    transform:
+        translate(-50%,-50%)
+        rotate(-17deg);
+
+    border:20px solid rgba(255,126,10,.48);
+
+    border-radius:50%;
+    filter:blur(5px);
+
+    animation:holeSpin 7s linear infinite;
+}
+
+.blackHole::after{
+    content:"";
+
+    position:absolute;
+
+    width:125px;
+    height:125px;
+
+    left:50%;
+    top:50%;
+
+    transform:translate(-50%,-50%);
+
+    border-radius:50%;
+    background:#000;
+
+    box-shadow:
+        0 0 50px #000,
+        0 0 100px rgba(255,80,0,.25);
+}
+
+@keyframes holeSpin{
+    from{
+        transform:
+            translate(-50%,-50%)
+            rotate(0);
+    }
+
+    to{
+        transform:
+            translate(-50%,-50%)
+            rotate(360deg);
+    }
+}
+
+.holeText{
+    position:absolute;
+    z-index:3;
+    left:30px;
+    bottom:30px;
+}
+
+.holeText h3{
+    color:#fff;
+    font-size:33px;
+}
+
+.holeText p{
+    color:var(--muted);
+}
+
+/* =========================================================
+   GALAXY
+   ========================================================= */
+
+.galaxyScene{
+    height:520px;
+
+    position:relative;
+    overflow:hidden;
+
+    border-radius:35px;
+    border:1px solid var(--border);
+
+    background:#010207;
+}
+
+.galaxy{
+    position:absolute;
+
+    left:50%;
+    top:50%;
+
+    width:350px;
+    height:180px;
+
+    transform:
+        translate(-50%,-50%)
+        rotate(-18deg);
+
+    border-radius:50%;
+
+    background:
+        radial-gradient(
+            ellipse,
+            #fff 0 2%,
+            #bdaeff 4%,
+            rgba(100,80,255,.8) 12%,
+            rgba(72,67,230,.5) 28%,
+            rgba(45,30,130,.2) 48%,
+            transparent 70%
+        );
+
+    box-shadow:
+        0 0 90px rgba(100,80,255,.4);
+
+    animation:galaxySpin 15s linear infinite;
+}
+
+.galaxy::before,
+.galaxy::after{
+    content:"";
+    position:absolute;
+    inset:-50px;
+
+    border-radius:50%;
+    border:25px solid rgba(104,85,255,.08);
+}
+
+.galaxy::before{
+    transform:rotate(35deg);
+}
+
+.galaxy::after{
+    transform:rotate(-35deg);
+}
+
+@keyframes galaxySpin{
+    to{
+        transform:
+            translate(-50%,-50%)
+            rotate(342deg);
+    }
+}
+
+.galaxyLabel{
+    position:absolute;
+    left:25px;
+    bottom:25px;
+
+    padding:15px 18px;
+
+    border:1px solid var(--border);
+    border-radius:15px;
+
+    background:rgba(3,4,13,.7);
+}
+
+/* =========================================================
+   ROCKET ANIMATION
+   ========================================================= */
+
+.rocketStage{
+    height:620px;
+
+    position:relative;
+    overflow:hidden;
+
+    border-radius:35px;
+    border:1px solid var(--border);
+
+    background:
+        radial-gradient(
+            circle at 70% 20%,
+            rgba(77,124,255,.2),
+            transparent 22%
+        ),
+        linear-gradient(#050713,#010207);
+}
+
+.rocket{
+    position:absolute;
+
+    width:65px;
+    height:230px;
+
+    left:50%;
+    bottom:45px;
+
+    transform:translateX(-50%);
+
+    border-radius:50px 50px 12px 12px;
+
+    background:
+        linear-gradient(
+            90deg,
+            #7d879c,
+            #fff,
+            #9da7b9
+        );
+
+    box-shadow:0 0 35px rgba(255,255,255,.15);
+
+    animation:launch 8s ease-in infinite;
+}
+
+.rocket::before{
+    content:"";
+
+    position:absolute;
+
+    left:0;
+    top:-38px;
+
+    border-left:32px solid transparent;
+    border-right:32px solid transparent;
+    border-bottom:42px solid #dfe4ee;
+}
+
+.rocket::after{
+    content:"";
+
+    position:absolute;
+
+    left:15px;
+    bottom:-120px;
+
+    width:35px;
+    height:130px;
+
+    background:
+        linear-gradient(
+            #fff,
+            #00eaff 30%,
+            #ff9800 65%,
+            transparent
+        );
+
+    filter:blur(6px);
+
+    animation:flame .1s infinite alternate;
+}
+
+@keyframes launch{
+    0%,12%{bottom:45px}
+    100%{bottom:760px}
+}
+
+@keyframes flame{
+    from{transform:scaleY(.7)}
+    to{transform:scaleY(1.2)}
+}
+
+/* =========================================================
+   SATELLITE
+   ========================================================= */
+
+.satelliteScene{
+    height:500px;
+
+    position:relative;
+    overflow:hidden;
+
+    border-radius:35px;
+    border:1px solid var(--border);
+
+    background:
+        radial-gradient(
+            circle at 70% 20%,
+            rgba(0,234,255,.13),
+            transparent 22%
+        ),
+        #02030b;
+}
+
+.satellite{
+    position:absolute;
+
+    left:50%;
+    top:50%;
+
+    width:95px;
+    height:58px;
+
+    transform:translate(-50%,-50%);
+
+    border-radius:8px;
+
+    background:linear-gradient(#9aa5bc,#eef3ff);
+
+    box-shadow:0 0 30px rgba(255,255,255,.12);
+
+    animation:satFloat 4s ease-in-out infinite;
+}
+
+.satellite::before,
+.satellite::after{
+    content:"";
+
+    position:absolute;
+
+    top:11px;
+
+    width:82px;
+    height:36px;
+
+    background:
+        repeating-linear-gradient(
+            90deg,
+            #182a72 0 8px,
+            #244cc2 8px 12px
+        );
+
+    border:2px solid #8ba7ff;
+}
+
+.satellite::before{
+    right:97px;
+}
+
+.satellite::after{
+    left:97px;
+}
+
+@keyframes satFloat{
+    50%{
+        transform:
+            translate(-50%,-58%)
+            rotate(4deg);
+    }
+}
+
+/* =========================================================
+   TIMELINE
+   ========================================================= */
+
+.timeline{
+    max-width:900px;
+    margin:auto;
+    position:relative;
+}
+
+.timeline::before{
+    content:"";
+    position:absolute;
+
+    left:20px;
+    top:0;
+    bottom:0;
+
+    width:2px;
+
+    background:
+        linear-gradient(
+            var(--cyan),
+            var(--blue),
+            var(--purple),
+            var(--pink)
+        );
+}
+
+.timelineItem{
+    position:relative;
+    padding-left:65px;
+    margin-bottom:45px;
+}
+
+.timelineItem::before{
+    content:"";
+
+    position:absolute;
+
+    left:10px;
+    top:6px;
+
+    width:22px;
+    height:22px;
+
+    border-radius:50%;
+
+    background:var(--bg);
+    border:3px solid var(--cyan);
+
+    box-shadow:0 0 20px var(--cyan);
+}
+
+.timelineItem h3{
+    margin-bottom:7px;
+}
+
+.timelineItem p{
+    color:var(--muted);
+}
+
+/* =========================================================
+   TABLE
+   ========================================================= */
+
+.tableBox{
+    overflow-x:auto;
+    border-radius:22px;
+    border:1px solid var(--border);
+}
+
+table{
+    width:100%;
+    min-width:850px;
+    border-collapse:collapse;
+}
+
+th,td{
+    padding:16px;
+    text-align:left;
+    border-bottom:1px solid var(--border);
+}
+
+th{
+    color:var(--cyan);
+    background:rgba(0,234,255,.05);
+}
+
+td{
+    color:#b7bfd9;
+}
+
+/* =========================================================
+   SEARCH
+   ========================================================= */
+
+.searchBox{
+    max-width:700px;
+    margin:0 auto 40px;
+}
+
+.searchBox input{
+    width:100%;
+
+    padding:17px 20px;
+
+    border-radius:50px;
+
+    border:1px solid var(--border);
+    outline:none;
+
+    background:rgba(255,255,255,.05);
+    color:white;
+
+    font-size:15px;
+
+    box-shadow:0 0 30px rgba(0,0,0,.2);
+}
+
+.searchBox input:focus{
+    border-color:var(--cyan);
+    box-shadow:0 0 25px rgba(0,234,255,.15);
+}
+
+/* =========================================================
+   STATS
+   ========================================================= */
+
+.stats{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:16px;
+}
+
+.stat{
+    text-align:center;
+
+    padding:28px 12px;
+
+    border:1px solid var(--border);
+    border-radius:22px;
+
+    background:rgba(255,255,255,.04);
+}
+
+.stat strong{
+    display:block;
+    color:var(--cyan);
+    font-size:31px;
+}
+
+.stat span{
+    color:var(--muted);
+    font-size:13px;
+}
+
+/* =========================================================
+   FAQ
+   ========================================================= */
+
+details{
+    margin-bottom:12px;
+
+    padding:18px 20px;
+
+    border:1px solid var(--border);
+    border-radius:17px;
+
+    background:rgba(255,255,255,.035);
+}
+
+summary{
+    cursor:pointer;
+    color:#fff;
+    font-weight:700;
+}
+
+details p{
+    margin-top:14px;
+    color:var(--muted);
+}
+
+/* =========================================================
+   QUOTE
+   ========================================================= */
+
+.quote{
+    max-width:950px;
+    margin:auto;
+
+    padding:75px 30px;
+
+    border-radius:32px;
+
+    text-align:center;
+
+    border:1px solid var(--border);
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(77,124,255,.1),
+            rgba(255,60,172,.05)
+        );
+}
+
+.quote h2{
+    font-size:clamp(28px,4vw,48px);
+    line-height:1.3;
+}
+
+.quote p{
+    margin-top:20px;
+    color:var(--muted);
+}
+
+/* =========================================================
+   FOOTER
+   ========================================================= */
+
+footer{
+    padding:80px 7%;
+    text-align:center;
+
+    border-top:1px solid var(--border);
+    color:var(--muted);
+}
+
+footer .logo{
+    display:inline-block;
+    margin-bottom:18px;
+}
+
+/* =========================================================
+   REVEAL
+   ========================================================= */
+
+.reveal{
+    opacity:0;
+    transform:translateY(40px);
+
+    transition:
+        opacity .9s ease,
+        transform .9s ease;
+}
+
+.reveal.show{
+    opacity:1;
+    transform:translateY(0);
+}
+
+/* =========================================================
+   TOP BUTTON
+   ========================================================= */
+
+#topBtn{
+    position:fixed;
+
+    right:22px;
+    bottom:22px;
+
+    width:47px;
+    height:47px;
+
+    border-radius:50%;
+
+    border:1px solid var(--border);
+
+    background:rgba(5,7,20,.9);
+    color:white;
+
+    cursor:pointer;
+
+    display:none;
+    z-index:999;
+}
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
+@media(max-width:850px){
+
+    nav ul{
+        display:none;
+
+        position:absolute;
+
+        right:5%;
+        top:68px;
+
+        width:230px;
+
+        padding:20px;
+
+        flex-direction:column;
+
+        background:rgba(5,7,20,.98);
+
+        border:1px solid var(--border);
+        border-radius:20px;
+    }
+
+    nav ul.active{
+        display:flex;
+    }
+
+    .menu{
+        display:block;
+    }
+
+    .grid{
+        grid-template-columns:1fr;
+    }
+
+    .stats{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+    .article{
+        padding:27px 21px;
+    }
+
+    .solarSystem{
+        height:470px;
+    }
+
+    .orbit8{
+        width:490px;
+        height:490px;
+    }
+
+    .neptuneOrbit{
+        width:490px;
+        height:490px;
+    }
+
+    .uranusOrbit{
+        width:430px;
+        height:430px;
+    }
+
+    .saturnOrbit{
+        width:380px;
+        height:380px;
+    }
+
+    .jupiterOrbit{
+        width:325px;
+        height:325px;
+    }
+
+    .marsOrbit{
+        width:275px;
+        height:275px;
+    }
+
+    .earthOrbit{
+        width:225px;
+        height:225px;
+    }
+
+    .venusOrbit{
+        width:175px;
+        height:175px;
+    }
+
+    .mercuryOrbit{
+        width:125px;
+        height:125px;
+    }
+}
+
+@media(max-width:450px){
+
+    section{
+        padding-left:5%;
+        padding-right:5%;
+    }
+
+    .hero h1{
+        letter-spacing:-3px;
+    }
+
+    .stats{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+    .article{
+        padding:23px 17px;
+    }
+
+    .blackHole{
+        min-height:430px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<!-- =========================================================
+     NAVBAR
+     ========================================================= -->
+
+<nav>
+
+<div class="logo">DELTA WEB</div>
+
+<div class="menu" onclick="toggleMenu()">☰</div>
+
+<ul id="navMenu">
+
+<li><a href="#home">Home</a></li>
+<li><a href="#astronomi">Astronomi</a></li>
+<li><a href="#tatasurya">Tata Surya</a></li>
+<li><a href="#blackhole">Black Hole</a></li>
+<li><a href="#galaksi">Galaksi</a></li>
+<li><a href="#bintang">Bintang</a></li>
+<li><a href="#roket">Roket</a></li>
+<li><a href="#satelit">Satelit</a></li>
+<li><a href="#lembaga">Lembaga</a></li>
+<li><a href="#lainnya">Lainnya</a></li>
+
+</ul>
+
+</nav>
+
+
+<!-- =========================================================
+     HERO
+     ========================================================= -->
+
+<section class="hero" id="home">
+
+<div class="heroContent reveal">
+
+<div class="status">
+<i></i>
+DELTA WEB • SPACE KNOWLEDGE
+</div>
+
+<h1>
+Jelajahi
+<br>
+<span class="gradient">
+Alam Semesta
+</span>
+</h1>
+
+<p>
+DELTA WEB adalah ensiklopedia digital bertema
+astronomi dan antariksa. Pelajari bagaimana
+gravitasi bekerja, bagaimana planet mengorbit
+Matahari, bagaimana bintang lahir dan mati,
+mengapa black hole begitu ekstrem, bagaimana
+roket membawa manusia ke luar angkasa,
+bagaimana satelit mengorbit Bumi, serta bagaimana
+galaksi membentuk struktur kosmik yang sangat besar.
+</p>
+
+<div class="heroButtons">
+
+<a href="#astronomi" class="btn primary">
+🚀 MULAI EKSPLORASI
+</a>
+
+<a href="#tatasurya" class="btn">
+🌍 TATA SURYA
+</a>
+
+</div>
+
+</div>
+
+<div class="orb one"></div>
+<div class="orb two"></div>
+
+</section>
+
+
+<!-- =========================================================
+     MOVING REFERENCES
+     ========================================================= -->
+
+<div class="referenceBox">
+
+<div class="referenceTrack">
+
+<div class="referenceItem">
+<span>✦</span> NASA
+</div>
+
+<div class="referenceItem">
+<span>✦</span> ESA
+</div>
+
+<div class="referenceItem">
+<span>✦</span> JAXA
+</div>
+
+<div class="referenceItem">
+<span>✦</span> ISRO
+</div>
+
+<div class="referenceItem">
+<span>✦</span> CNSA
+</div>
+
+<div class="referenceItem">
+<span>✦</span> Roscosmos
+</div>
+
+<div class="referenceItem">
+<span>✦</span> JPL
+</div>
+
+<div class="referenceItem">
+<span>✦</span> Event Horizon Telescope
+</div>
+
+<div class="referenceItem">
+<span>✦</span> Space Science
+</div>
+
+<div class="referenceItem">
+<span>✦</span> NASA
+</div>
+
+<div class="referenceItem">
+<span>✦</span> ESA
+</div>
+
+<div class="referenceItem">
+<span>✦</span> JAXA
+</div>
+
+<div class="referenceItem">
+<span>✦</span> ISRO
+</div>
+
+<div class="referenceItem">
+<span>✦</span> CNSA
+</div>
+
+<div class="referenceItem">
+<span>✦</span> Roscosmos
+</div>
+
+<div class="referenceItem">
+<span>✦</span> JPL
+</div>
+
+</div>
+
+</div>
+
+
+<!-- =========================================================
+     ASTRONOMI
+     ========================================================= -->
+
+<section id="astronomi">
+
+<div class="sectionTitle reveal">
+
+<div class="number">01 — FUNDAMENTAL</div>
+
+<h2>Apa Itu Astronomi?</h2>
+
+<p>
+Ilmu yang digunakan manusia untuk memahami
+alam semesta.
+</p>
+
+</div>
+
+<div class="article reveal">
+
+<h3>Apa itu astronomi?</h3>
+
+<p>
+Astronomi adalah ilmu yang mempelajari benda langit,
+ruang, waktu, materi, energi, dan berbagai fenomena
+yang terjadi di luar atmosfer Bumi. Objek yang dipelajari
+mencakup Bulan, planet, Matahari, asteroid, komet,
+bintang, nebula, galaksi, black hole, serta struktur
+alam semesta pada skala yang sangat besar.
+</p>
+
+<h3>Astronomi dan astrofisika</h3>
+
+<p>
+Astronomi berhubungan erat dengan astrofisika.
+Astronomi sering berfokus pada pengamatan dan
+pemahaman objek langit, sedangkan astrofisika
+menggunakan hukum fisika untuk menjelaskan
+mengapa objek tersebut memiliki sifat tertentu.
+Dalam praktik modern, keduanya sangat sulit dipisahkan.
+</p>
+
+<h3>Bagaimana manusia mengetahui sesuatu yang sangat jauh?</h3>
+
+<p>
+Kita tidak perlu mengunjungi setiap bintang untuk
+mempelajarinya. Cahaya membawa informasi dari objek
+tersebut menuju teleskop. Dengan menganalisis warna,
+spektrum, intensitas, perubahan waktu, dan jenis radiasi
+lainnya, ilmuwan dapat mengetahui banyak hal tentang
+temperatur, komposisi, gerakan, dan kondisi fisik objek.
+</p>
+
+<h3>Cabang astronomi</h3>
+
+<ul>
+<li>Astronomi observasional</li>
+<li>Astrofisika</li>
+<li>Kosmologi</li>
+<li>Ilmu planet</li>
+<li>Astronomi bintang</li>
+<li>Astronomi galaksi</li>
+<li>Astrobiologi</li>
+<li>Astronomi radio</li>
+<li>Astronomi sinar-X</li>
+<li>Astronomi inframerah</li>
+</ul>
+
+<div class="info">
+<b>Intinya:</b>
+Astronomi adalah usaha ilmiah untuk memahami
+apa yang ada di alam semesta dan bagaimana semuanya
+bekerja berdasarkan bukti pengamatan serta teori fisika.
+</div>
+
+</div>
+
+</section>
+
+
+<!-- =========================================================
+     GRAVITY
+     ========================================================= -->
+
+<section>
+
+<div class="sectionTitle reveal">
+
+<div class="number">02 — FUNDAMENTAL FORCE</div>
+
+<h2>Apa Itu Gravitasi?</h2>
+
+<p>
+Salah satu konsep paling penting dalam astronomi.
+</p>
+
+</div>
+
+<div class="article reveal">
+
+<h3>Pengertian gravitasi</h3>
+
+<p>
+Gravitasi adalah interaksi yang membuat benda-benda
+bermassa saling memengaruhi. Gravitasi menyebabkan
+kita tetap berada di permukaan Bumi, Bulan mengorbit
+Bumi, Bumi mengorbit Matahari, dan planet-planet
+tetap berada dalam sistem Tata Surya.
+</p>
+
+<h3>Gravitasi menurut Newton</h3>
+
+<p>
+Dalam hukum gravitasi universal Newton, dua benda
+saling tarik dengan gaya yang bergantung pada massa
+keduanya dan jarak di antara pusat massa benda tersebut.
+Semakin besar massa, semakin besar pengaruh gravitasi.
+Semakin jauh jaraknya, pengaruh gravitasi semakin lemah.
+</p>
+
+<h3>Gravitasi menurut Einstein</h3>
+
+<p>
+Dalam relativitas umum, gravitasi dipahami sebagai
+kelengkungan ruang-waktu akibat massa dan energi.
+Benda bergerak mengikuti geometri ruang-waktu tersebut.
+Konsep ini membantu menjelaskan fenomena seperti
+pembelokan cahaya dan gerak Merkurius secara lebih lengkap.
+</p>
+
+<h3>Kenapa planet tidak jatuh ke Matahari?</h3>
+
+<p>
+Sebenarnya planet terus "jatuh" menuju Matahari,
+tetapi planet juga memiliki kecepatan menyamping.
+Akibat gabungan gerak maju dan tarikan gravitasi,
+lintasan planet menjadi orbit. Dengan cara sederhana,
+planet terus jatuh melewati Matahari tanpa langsung
+menabraknya.
+</p>
+
+<div class="info">
+<b>Analogi sederhana:</b>
+Bayangkan melempar bola secara horizontal.
+Semakin cepat bola dilempar, semakin jauh bola
+bergerak sebelum jatuh. Pada skala orbit, kecepatan
+horizontal dan gravitasi dapat menghasilkan lintasan
+mengelilingi sebuah benda.
+</div>
+
+</div>
+
+</section>
+
+
+<!-- =========================================================
+     SOLAR SYSTEM
+     ========================================================= -->
+
+<section id="tatasurya">
+
+<div class="sectionTitle reveal">
+
+<div class="number">03 — SOLAR SYSTEM</div>
+
+<h2>Tata Surya Bergerak</h2>
+
+<p>
+Lihat model animasi sederhana delapan planet
+yang mengorbit Matahari.
+</p>
+
+</div>
+
+<div class="solarSystem reveal">
+
+<div class="sun"></div>
+
+<div class="sunLabel">☀ MATAHARI</div>
+
+<div class="orbit orbit1"></div>
+<div class="orbit orbit2"></div>
+<div class="orbit orbit3"></div>
+<div class="orbit orbit4"></div>
+<div class="orbit orbit5"></div>
+<div class="orbit orbit6"></div>
+<div class="orbit orbit7"></div>
+<div class="orbit orbit8"></div>
+
+<div class="planetOrbit mercuryOrbit">
+<div class="planet mercury"></div>
+</div>
+
+<div class="planetOrbit venusOrbit">
+<div class="planet venus"></div>
+</div>
+
+<div class="planetOrbit earthOrbit">
+<div class="planet earth"></div>
+</div>
+
+<div class="planetOrbit marsOrbit">
+<div class="planet mars"></div>
+</div>
+
+<div class="planetOrbit jupiterOrbit">
+<div class="planet jupiter"></div>
+</div>
+
+<div class="planetOrbit saturnOrbit">
+<div class="planet saturn"></div>
+</div>
+
+<div class="planetOrbit uranusOrbit">
+<div class="planet uranus"></div>
+</div>
+
+<div class="planetOrbit neptuneOrbit">
+<div class="planet neptune"></div>
+</div>
+
+<div class="planetLegend">
+☿ Merkurius • ♀ Venus • 🌍 Bumi • 🔴 Mars •
+Jupiter • Saturnus • Uranus • Neptunus
+</div>
+
+</div>
+
+<br><br>
+
+<div class="article reveal">
+
+<h3>Apa itu Tata Surya?</h3>
+
+<p>
+Tata Surya adalah sistem yang terdiri dari Matahari
+dan semua benda yang terikat secara gravitasi dengannya.
+Di dalamnya terdapat delapan planet, planet katai,
+bulan, asteroid, komet, debu, gas, serta objek kecil
+lainnya.
+</p>
+
+<h3>Urutan planet dari Matahari</h3>
+
+<ul>
+<li>1. Merkurius</li>
+<li>2. Venus</li>
+<li>3. Bumi</li>
+<li>4. Mars</li>
+<li>5. Jupiter</li>
+<li>6. Saturnus</li>
+<li>7. Uranus</li>
+<li>8. Neptunus</li>
+</ul>
+
+<h3>Planet dalam</h3>
+
+<p>
+Merkurius, Venus, Bumi dan Mars disebut planet terestrial
+atau planet berbatu. Mereka relatif kecil dibandingkan
+raksasa gas dan memiliki permukaan padat.
+</p>
+
+<h3>Planet luar</h3>
+
+<p>
+Jupiter dan Saturnus adalah raksasa gas, sedangkan
+Uranus dan Neptunus sering disebut raksasa es.
+Planet luar memiliki ukuran jauh lebih besar dibanding
+Bumi dan memiliki sistem atmosfer serta satelit yang kompleks.
+</p>
+
+<h3>Apakah ukuran dan jarak pada animasi ini sebenarnya?</h3>
+
+<p>
+Tidak. Animasi dibuat untuk visualisasi. Jika jarak dan ukuran
+planet dibuat benar-benar berskala dalam satu layar,
+planet akan sangat kecil dan jaraknya sangat jauh.
+Karena itu model digital seperti ini menggunakan skala
+yang disederhanakan agar mudah dilihat.
+</p>
+
+</div>
+
+</section>
+
+
+<!-- =========================================================
+     PLANETS
+     ========================================================= -->
+
+<section>
+
+<div class="sectionTitle reveal">
+
+<div class="number">04 — PLANETS</div>
+
+<h2>Planet-Planet Tata Surya</h2>
+
+</div>
+
+<div class="grid">
+
+<div class="card reveal">
+<div class="cardIcon">☿️</div>
+<h3>Merkurius</h3>
+<p>
+Planet terdekat dari Matahari. Ukurannya kecil,
+memiliki permukaan penuh kawah, dan hampir tidak
+memiliki atmosfer tebal seperti Bumi.
+</p>
+</div>
+
+<div class="card reveal">
+<div class="cardIcon">🟡</div>
+<h3>Venus</h3>
+<p>
+Planet berbatu dengan atmosfer sangat tebal.
+Efek rumah kaca yang sangat kuat membuat
+permukaannya menjadi sangat panas.
+</p>
+</div>
+
+<div class="card reveal">
+<div class="cardIcon">🌍</div>
+<h3>Bumi</h3>
+<p>
+Planet tempat manusia hidup. Bumi memiliki air
+dalam jumlah besar di permukaan dan atmosfer
+yang mendukung kehidupan yang kita kenal.
+</p>
+</div>
+
+<div class="card reveal">
+<div class="cardIcon">🔴</div>
+<h3>Mars</h3>
+<p>
+Dunia berbatu berwarna kemerahan yang memiliki
+gunung berapi raksasa, lembah, es kutub dan
+bukti adanya air pada masa lalu.
+</p>
+</div>
+
+<div class="card reveal">
+<div class="cardIcon">🟠</div>
+<h3>Jupiter</h3>
+<p>
+Planet terbesar di Tata Surya. Jupiter memiliki
+atmosfer berawan, medan magnet kuat dan banyak
+satelit alami.
+</p>
+</div>
+
+<div class="card reveal">
+<div class="cardIcon">🪐</div>
+<h3>Saturnus</h3>
+<p>
+Terkenal karena sistem cincinnya yang luas.
+Saturnus juga memiliki banyak bulan dengan
+karakteristik yang sangat beragam.
+</p>
+</div>
+
+<div class="card reveal">
+<div class="cardIcon">🔵</div>
+<h3>Uranus</h3>
+<p>
+Raksasa es dengan kemiringan sumbu rotasi
+yang ekstrem sehingga terlihat seperti
+berputar hampir menyamping.
+</p>
+</div>
+
+<div class="card reveal">
+<div class="cardIcon">🔷</div>
+<h3>Neptunus</h3>
+<p>
+Raksasa es terjauh dari Matahari di antara
+delapan planet. Atmosfernya memiliki angin
+yang sangat cepat.
+</p>
+</div>
+
+</div>
+
+</section>
+
+
+<!-- =========================================================
+     BLACK HOLE
+     ========================================================= -->
+
+<section id="blackhole">
+
+<div class="sectionTitle reveal">
+
+<div class="number">05 — EXTREME COSMOS</div>
+
+<h2>Black Hole</h2>
+
+<p>
+Objek ekstrem yang menguji pemahaman manusia
+tentang gravitasi dan ruang-waktu.
+</p>
+
+</div>
+
+<div class="blackHole reveal">
+
+<div class="holeText">
+
+<h3>🕳 BLACK HOLE</h3>
+
+<p>
+Gravitasi ekstrem • ruang-waktu sangat melengkung
+</p>
+
+</div>
+
+</div>
+
+<br><br>
+
+<div class="article reveal">
+
+<h3>Apa itu black hole?</h3>
+
+<p>
+Black hole atau lubang hitam adalah wilayah ruang-waktu
+yang memiliki gravitasi sangat kuat. Terdapat batas yang
+disebut horizon peristiwa. Setelah melewati batas tersebut,
+tidak ada jalur keluar menuju luar yang dapat dilalui
+bahkan oleh cahaya.
+</p>
+
+<h3>Black hole bukan lubang biasa</h3>
+
+<p>
+Nama "lubang hitam" dapat menimbulkan gambaran bahwa
+black hole adalah lubang kosong di ruang angkasa.
+Gambaran tersebut kurang tepat. Black hole merupakan
+konfigurasi ruang-waktu yang sangat ekstrem yang terbentuk
+dari massa dan energi yang terkonsentrasi.
+</p>
+
+<h3>Event horizon</h3>
+
+<p>
+Horizon peristiwa adalah batas penting di sekitar black hole.
+Dari luar, pengamat dapat mempelajari efek gravitasi dan
+materi di sekitar wilayah tersebut. Setelah sesuatu melewati
+horizon, struktur ruang-waktu membuat perjalanan kembali
+ke luar tidak tersedia.
+</p>
+
+<h3>Accretion disk</h3>
+
+<p>
+Materi yang jatuh menuju black hole tidak selalu langsung
+masuk. Materi dapat membentuk cakram akresi yang berputar.
+Gesekan dan proses fisik lainnya dapat memanaskan gas
+hingga sangat panas dan menghasilkan radiasi.
+Karena itu black hole dapat terlihat secara tidak langsung.
+</p>
+
+<h3>Jet relativistik</h3>
+
+<p>
+Beberapa black hole yang aktif dapat berhubungan dengan
+jet partikel yang bergerak sangat cepat sepanjang arah
+tertentu dari wilayah sekitar black hole. Jet seperti ini
+dapat menjangkau jarak yang sangat besar.
+</p>
+
+<h3>Singularitas</h3>
+
+<p>
+Dalam relativitas umum klasik, solusi tertentu memprediksi
+singularitas. Namun singularitas juga menunjukkan bahwa
+teori tersebut tidak memberikan gambaran lengkap mengenai
+fisika pada kondisi ekstrem tersebut. Karena itu hubungan
+antara gravitasi dan mekanika kuantum masih menjadi
+pertanyaan fundamental.
+</p>
+
+<h3>Jenis black hole</h3>
+
+<ul>
+<li><b>Stellar-mass:</b> berkaitan dengan massa bintang.</li>
+<li><b>Intermediate-mass:</b> berada di antara kategori massa.</li>
+<li><b>Supermassive:</b> dapat mencapai jutaan hingga miliaran massa Matahari.</li>
+<li><b>Primordial:</b> black hole hipotetis yang mungkin terbentuk di alam semesta awal.</li>
+</ul>
+
+<h3>Sagittarius A*</h3>
+
+<p>
+Di pusat Bima Sakti terdapat Sagittarius A*,
+sebuah black hole supermasif. Keberadaannya
+didukung oleh pengamatan terhadap orbit bintang
+yang bergerak sangat cepat di sekitar pusat galaksi.
+</p>
+
+<h3>M87*</h3>
+
+<p>
+M87* adalah black hole supermasif di pusat galaksi
+Messier 87. Event Horizon Telescope berhasil
+menghasilkan citra struktur cahaya di sekitar
+bayangan black hole tersebut.
+</p>
+
+<h3>Apakah black hole menyedot semua benda?</h3>
+
+<p>
+Tidak. Black hole tidak bekerja seperti vacuum cleaner.
+Jika sebuah benda berada jauh dari black hole,
+pengaruh gravitasinya mengikuti prinsip gravitasi
+seperti objek bermassa lainnya. Bahaya ekstrem
+muncul ketika benda mendekati black hole.
+</p>
+
+<h3>Spaghettification</h3>
+
+<p>
+Perbedaan kekuatan gravitasi antara bagian tubuh atau
+benda yang lebih dekat dan lebih jauh dari black hole
+dapat menghasilkan gaya pasang surut yang sangat besar.
+Dalam kondisi ekstrem, benda dapat diregangkan secara
+panjang. Fenomena populer ini disebut spaghettification.
+</p>
+
+<h3>Gelombang gravitasi</h3>
+
+<p>
+Penggabungan objek kompak seperti black hole dapat
+menghasilkan gelombang gravitasi, yaitu perubahan
+yang merambat pada struktur ruang-waktu. Instrumen
+seperti LIGO, Virgo dan KAGRA digunakan untuk
+mendeteksi fenomena semacam ini.
+</p>
+
+<div class="info">
+<b>Kesimpulan:</b>
+Black hole bukan sekadar objek "gelap". Black hole
+berhubungan dengan gravitasi ekstrem, relativitas,
+materi panas, gelombang gravitasi dan pertanyaan
+mendasar tentang fisika.
+</div>
+
+</div>
+
+</section>
+
+
+<!-- =========================================================
+     GALAXY
+     ========================================================= -->
+
+<section id="galaksi">
+
+<div class="sectionTitle reveal">
+
+<div class="number">06 — GALAXIES</div>
+
+<h2>Galaksi & Bima Sakti</h2>
+
+<p>
+Sistem kosmik raksasa yang berisi bintang,
+gas, debu, materi gelap dan objek lainnya.
+</p>
+
+</div>
+
+<div class="galaxyScene reveal">
+
+<div class="galaxy"></div>
+
+<div class="galaxyLabel">
+🌌 SIMULASI GALAKSI SPIRAL
+</div>
+
+</div>
+
+<br><br>
+
+<div class="article reveal">
+
+<h3>Apa itu galaksi?</h3>
+
+<p>
+Galaksi adalah sistem gravitasi besar yang berisi
+bintang, gas, debu, materi gelap dan objek lainnya.
+Galaksi dapat berisi jutaan hingga triliunan bintang
+tergantung jenis dan ukurannya.
+</p>
+
+<h3>Galaksi kita</h3>
+
+<p>
+Galaksi tempat Tata Surya berada disebut
+<b>Bima Sakti</b> atau Milky Way.
+Bima Sakti merupakan galaksi spiral berbatang.
+Tata Surya berada di salah satu struktur spiral
+yang sering disebut Orion Spur.
+</p>
+
+<h3>Pusat Bima Sakti</h3>
+
+<p>
+Di pusat galaksi terdapat Sagittarius A*,
+black hole supermasif yang massanya sekitar
+jutaan kali massa Matahari. Bintang-bintang
+di dekat pusat galaksi bergerak mengelilingi
+wilayah tersebut dengan kecepatan tinggi.
+</p>
+
+<h3>Jenis galaksi</h3>
+
+<ul>
+<li>Galaksi spiral</li>
+<li>Galaksi spiral berbatang</li>
+<li>Galaksi elips</li>
+<li>Galaksi lentikular</li>
+<li>Galaksi tidak beraturan</li>
+</ul>
+
+<h3>Galaksi terkenal</h3>
+
+<ul>
+<li>Bima Sakti</li>
+<li>Andromeda</li>
+<li>Triangulum</li>
+<li>Large Magellanic Cloud</li>
+<li>Small Magellanic Cloud</li>
+<li>Messier 87</li>
+<li>Whirlpool Galaxy</li>
+</ul>
+
+<h3>Apakah galaksi bisa bertabrakan?</h3>
+
+<p>
+Ya. Galaksi dapat berinteraksi secara gravitasi.
+Istilah "tabrakan" tidak selalu berarti semua bintang
+saling bertumbukan. Jarak antar-bintang sangat besar.
+Namun gravitasi dapat mengubah bentuk galaksi,
+memicu pembentukan bintang dan akhirnya menghasilkan
+galaksi dengan struktur baru.
+</p>
+
+</div>
+
+</section>
+
+
+<!-- =========================================================
+     STARS
+     ========================================================= -->
+
+<section id="bintang">
+
+<div class="sectionTitle reveal">
+
+<div class="number">07 — STARS</div>
+
+<h2>Bintang</h2>
+
+<p>
+Mesin nuklir alami yang menerangi galaksi.
+</p>
+
+</div>
+
+<div class="grid">
+
+<div class="card reveal">
+<div class="cardIcon">☀️</div>
+<h3>Matahari</h3>
+<p>
+Bintang pusat Tata Surya. Energi Matahari berasal
+dari fusi nuklir di inti, terutama penggabungan
+hidrogen menjadi helium.
+</p>
+</div>
+
+<div class="card reveal">
+<div class="cardIcon">⭐</div>
+<h3>Sirius</h3>
+<p>
+Salah satu bintang paling terang yang terlihat
+dari langit malam Bumi.
+</p>
+</div>
+
+<div class="card reveal">
+<div class="cardIcon">🔴</div>
+<h3>Betelgeuse</h3>
+<p>
+Superraksasa merah terkenal di rasi Orion.
+Ukurannya sangat besar dibandingkan Matahari.
+</p>
+</div>
+
+<div class="card reveal">
+<div class="cardIcon">🔵</div>
+<h3>Rigel</h3>
+<p>
+Bintang terang berwarna kebiruan di rasi Orion.
+Rigel jauh lebih panas dan bercahaya dibanding
+Matahari.
+</p>
+</div>
+
+<div class="card reveal">
+<div class="cardIcon">✨</div>
+<h3>Proxima Centauri</h3>
+<p>
+Bintang terdekat dengan Tata Surya yang diketahui
+berada dalam sistem Alpha Centauri.
+</p>
+</div>
+
+<div class="card reveal">
+<div class="cardIcon">🌟</div>
+<h3>VY Canis Majoris</h3>
+<p>
+Salah satu contoh bintang superraksasa yang
+ukurannya sangat besar.
+</p>
+</div>
+
+</div>
+
+<br><br>
+
+<div class="article reveal">
+
+<h3>Bagaimana bintang terbentuk?</h3>
+
+<p>
+Bintang dapat terbentuk dari awan gas dan debu
+yang mengalami keruntuhan gravitasi. Ketika materi
+terkumpul, tekanan dan temperatur di pusat meningkat.
+Jika kondisi inti memungkinkan fusi nuklir berlangsung,
+sebuah bintang dapat memasuki tahap kehidupan utama.
+</p>
+
+<h3>Apa itu fusi nuklir?</h3>
+
+<p>
+Fusi nuklir adalah proses ketika inti atom ringan
+bergabung membentuk inti yang lebih berat dan
+melepaskan energi. Pada bintang seperti Matahari,
+proses utamanya melibatkan hidrogen dan helium.
+</p>
+
+<h3>Kehidupan bintang</h3>
+
+<p>
+Massa awal bintang sangat menentukan evolusinya.
+Bintang bermassa berbeda dapat berakhir dengan cara
+berbeda. Sebagian menjadi white dwarf, sedangkan
+bintang yang sangat masif dapat mengalami ledakan
+supernova dan meninggalkan neutron star atau black hole.
+</p>
+
+</div>
+
+</section>
+
+
+<!-- =========================================================
+     ROCKET
+     ========================================================= -->
+
+<section id="roket">
+
+<div class="sectionTitle reveal">
+
+<div class="number">08 — ROCKET SCIENCE</div>
+
+<h2>Apa Itu Roket?</h2>
+
+<p>
+Teknologi yang memungkinkan manusia
+mengirim muatan menuju ruang angkasa.
+</p>
+
+</div>
+
+<div class="rocketStage reveal">
+
+<div class="rocket"></div>
+
+</div>
+
+<br><br>
+
+<div class="article reveal">
+
+<h3>Pengertian roket</h3>
+
+<p>
+Roket adalah kendaraan atau sistem propulsi yang
+menghasilkan gaya dorong dengan mengeluarkan massa
+ke satu arah sehingga kendaraan memperoleh momentum
+ke arah berlawanan.
+</p>
+
+<h3>Mengapa roket bisa bekerja di ruang hampa?</h3>
+
+<p>
+Roket membawa propelan sendiri. Mesin roket tidak
+membutuhkan atmosfer luar untuk "mendorong udara".
+Gas hasil pembakaran atau proses propulsi dikeluarkan
+melalui nozzle dan menghasilkan momentum berlawanan.
+</p>
+
+<h3>Bagian utama roket</h3>
+
+<ul>
+<li><b>Payload:</b> muatan.</li>
+<li><b>Propellant tank:</b> tempat propelan.</li>
+<li><b>Engine:</b> menghasilkan thrust.</li>
+<li><b>Nozzle:</b> mempercepat dan mengarahkan gas.</li>
+<li><b>Avionics:</b> sistem elektronik dan komputer.</li>
+<li><b>Guidance:</b> sistem navigasi dan kendali.</li>
+<li><b>Fairing:</b> pelindung muatan.</li>
+<li><b>Stage:</b> tahapan kendaraan.</li>
+</ul>
+
+<h3>Apa itu thrust?</h3>
+
+<p>
+Thrust adalah gaya dorong yang dihasilkan sistem
+propulsi. Agar roket dapat mempercepat ke atas,
+thrust harus mampu mengatasi berat kendaraan
+dan berbagai kerugian aerodinamis maupun gravitasi
+selama penerbangan.
+</p>
+
+<h3>Roket multistage</h3>
+
+<p>
+Roket multistage menggunakan beberapa tahap.
+Setelah satu tahap menghabiskan propelan dan tidak
+dibutuhkan lagi, tahap tersebut dapat dipisahkan.
+Hal ini mengurangi massa yang harus dibawa pada
+tahap berikutnya.
+</p>
+
+<h3>Jenis propulsi roket</h3>
+
+<ul>
+<li>Roket propelan padat</li>
+<li>Roket propelan cair</li>
+<li>Roket hibrida</li>
+<li>Propulsi listrik untuk wahana antariksa tertentu</li>
+</ul>
+
+<h3>Apa itu roket amatir?</h3>
+
+<p>
+Roket amatir adalah kegiatan pengembangan atau
+peluncuran roket dalam konteks hobi, pendidikan,
+eksperimen atau kompetisi di luar program roket
+profesional skala besar.
+</p>
+
+<div class="info warning">
+<b>Keselamatan:</b>
+Roket amatir tetap dapat menghasilkan energi dan
+kecepatan yang berbahaya. Kegiatan nyata harus
+mengikuti hukum, aturan penerbangan, lokasi peluncuran,
+standar keselamatan dan organisasi roket model
+yang berlaku. DELTA WEB tidak memberikan resep
+propelan atau instruksi pembuatan perangkat berbahaya.
+</div>
+
+</div>
+
+</section>
+
+
+<!-- =========================================================
+     FAMOUS ROCKETS
+     ========================================================= -->
+
+<section>
+
+<div class="sectionTitle reveal">
+
+<div class="number">09 — LAUNCH VEHICLES</div>
+
+<h2>Roket Terkenal</h2>
+
+<p>
+Contoh kendaraan peluncur yang memiliki
+peran penting dalam sejarah antariksa.
+</p>
+
+</div>
+
+<div class="tableBox reveal">
+
+<table>
+
+<thead>
+<tr>
+<th>Roket</th>
+<th>Negara/Organisasi</th>
+<th>Kategori</th>
+<th>Terkenal karena</th>
+</tr>
+</thead>
+
+<tbody>
+
+<tr>
+<td>Saturn V</td>
+<td>NASA / Amerika Serikat</td>
+<td>Super berat</td>
+<td>Program Apollo</td>
+</tr>
+
+<tr>
+<td>Space Shuttle</td>
+<td>NASA</td>
+<td>Sistem antariksa berawak</td>
+<td>Transportasi orbit dan ISS</td>
+</tr>
+
+<tr>
+<td>Falcon 9</td>
+<td>SpaceX</td>
+<td>Orbital</td>
+<td>Booster tahap pertama dapat digunakan kembali</td>
+</tr>
+
+<tr>
+<td>Falcon Heavy</td>
+<td>SpaceX</td>
+<td>Berat</td>
+<td>Peluncuran muatan besar</td>
+</tr>
+
+<tr>
+<td>Starship</td>
+<td>SpaceX</td>
+<td>Super berat</td>
+<td>Pengembangan sistem generasi baru</td>
+</tr>
+
+<tr>
+<td>Long March</td>
+<td>Tiongkok</td>
+<td>Keluarga peluncur</td>
+<td>Satelit dan misi antariksa</td>
+</tr>
+
+<tr>
+<td>Soyuz</td>
+<td>Rusia</td>
+<td>Keluarga peluncur</td>
+<td>Sejarah panjang penerbangan antariksa</td>
+</tr>
+
+<tr>
+<td>Ariane</td>
+<td>Eropa</td>
+<td>Keluarga peluncur</td>
+<td>Peluncuran satelit dan misi Eropa</td>
+</tr>
+
+<tr>
+<td>Atlas</td>
+<td>Amerika Serikat</td>
+<td>Keluarga peluncur</td>
+<td>Satelit dan misi ilmiah</td>
+</tr>
+
+<tr>
+<td>Electron</td>
+<td>Rocket Lab</td>
+<td>Ringan</td>
+<td>Satelit kecil</td>
+</tr>
+
+<tr>
+<td>Vega</td>
+<td>Eropa</td>
+<td>Ringan</td>
+<td>Muatan kecil hingga menengah</td>
+</tr>
+
+<tr>
+<td>PSLV</td>
+<td>ISRO / India</td>
+<td>Orbital</td>
+<td>Satelit dan misi India</td>
+</tr>
+
+<tr>
+<td>GSLV</td>
+<td>ISRO / India</td>
+<td>Orbital</td>
+<td>Peluncuran satelit</td>
+</tr>
+
+</tbody>
+</table>
+
+</div>
+
+</section>
+
+
+<!-- =========================================================
+     SATELLITE
+     ========================================================= -->
+
+<section id="satelit">
+
+<div class="sectionTitle reveal">
+
+<div class="number">10 — SATELLITES</div>
+
+<h2>Apa Itu Satelit?</h2>
+
+<p>
+Benda yang mengorbit benda lain karena gravitasi.
+</p>
+
+</div>
+
+<div class="satelliteScene reveal">
+
+<div class="satellite"></div>
+
+</div>
+
+<br><br>
+
+<div class="article reveal">
+
+<h3>Pengertian satelit</h3>
+
+<p>
+Satelit adalah benda yang mengorbit benda lain.
+Bulan merupakan satelit alami Bumi. Manusia juga
+membangun satelit buatan untuk komunikasi,
+navigasi, pengamatan Bumi, meteorologi,
+penelitian dan astronomi.
+</p>
+
+<h3>Jenis satelit berdasarkan fungsi</h3>
+
+<ul>
+<li>Satelit komunikasi</li>
+<li>Satelit navigasi</li>
+<li>Satelit cuaca</li>
+<li>Satelit pengamatan Bumi</li>
+<li>Satelit ilmiah</li>
+<li>Satelit astronomi</li>
+<li>Satelit demonstrasi teknologi</li>
+</ul>
+
+<h3>Apa itu orbit?</h3>
+
+<p>
+Orbit adalah lintasan suatu objek ketika bergerak
+di bawah pengaruh gravitasi. Satelit tidak diam
+di langit. Satelit terus bergerak dengan kecepatan
+tertentu sambil terus dipengaruhi gravitasi.
+</p>
+
+<h3>LEO</h3>
+
+<p>
+Low Earth Orbit adalah wilayah orbit rendah.
+Banyak satelit pengamatan Bumi, eksperimen dan
+konstelasi komunikasi berada pada orbit ini.
+</p>
+
+<h3>MEO</h3>
+
+<p>
+Medium Earth Orbit berada lebih tinggi dari LEO.
+Sebagian sistem navigasi satelit menggunakan
+orbit jenis ini.
+</p>
+
+<h3>GEO</h3>
+
+<p>
+Geostationary Earth Orbit berada di sekitar ekuator.
+Satelit pada orbit yang tepat dapat memiliki periode
+rotasi yang sama dengan rotasi Bumi sehingga tampak
+tetap di atas wilayah tertentu.
+</p>
+
+<h3>Konstelasi satelit</h3>
+
+<p>
+Konstelasi adalah kumpulan satelit yang bekerja
+sebagai sebuah sistem. Banyak satelit dapat
+memberikan cakupan wilayah yang luas dan
+meningkatkan kontinuitas layanan tertentu.
+</p>
+
+</div>
+
+</section>
+
+
+<!-- =========================================================
+     SPACE AGENCIES
+     ========================================================= -->
+
+<section id="lembaga">
+
+<div class="sectionTitle reveal">
+
+<div class="number">11 — SPACE AGENCIES</div>
+
+<h2>Lembaga Antariksa Dunia</h2>
+
+<p>
+Organisasi yang menjalankan penelitian,
+pengembangan teknologi dan misi antariksa.
+</p>
+
+</div>
+
+<div class="grid">
+
+<div class="card reveal">
+<div class="cardIcon">🇺🇸</div>
+<h3>NASA</h3>
+<p>
+Badan antariksa sipil Amerika Serikat.
+Programnya mencakup ilmu Bumi, astronomi,
+eksplorasi manusia, robotik dan teknologi.
+</p>
+</div>
+
+<div class="card reveal">
+<div class="cardIcon">🇪🇺</div>
+<h3>ESA</h3>
+<p>
+European Space Agency. Organisasi antariksa
+Eropa yang menjalankan program ilmu,
+observasi Bumi, navigasi dan eksplorasi.
+</p>
+</div>
+
+<div class="card reveal">
+<div class="cardIcon">🇷🇺</div>
+<h3>Roscosmos</h3>
+<p>
+Organisasi antariksa Rusia yang berkaitan
+dengan peluncuran, wahana, satelit dan
+penerbangan antariksa.
+</p>
+</div>
+
+<div class="card reveal">
+<div class="cardIcon">🇨🇳</div>
+<h3>CNSA</h3>
+<p>
+China National Space Administration.
+Berkaitan dengan program antariksa sipil
+Tiongkok dan berbagai misi eksplorasi.
+</p>
+</div>
+
+<div class="card reveal">
+<div class="cardIcon">🇯🇵</div>
+<h3>JAXA</h3>
+<p>
+Japan Aerospace Exploration Agency.
+Mengembangkan satelit, roket, ilmu antariksa
+dan misi eksplorasi seperti asteroid.
+</p>
+</div>
+
+<div class="card reveal">
+<div class="cardIcon">🇮🇳</div>
+<h3>ISRO</h3>
+<p>
+Indian Space Research Organisation.
+Mengembangkan satelit, kendaraan peluncur,
+observasi Bumi dan eksplorasi.
+</p>
+</div>
+
+<div class="card reveal">
+<div class="cardIcon">🇰🇷</div>
+<h3>KASA</h3>
+<p>
+Korea AeroSpace Administration.
+Mengembangkan dan mengoordinasikan
+program antariksa Korea Selatan.
+</p>
+</div>
+
+<div class="card reveal">
+<div class="cardIcon">🇫🇷</div>
+<h3>CNES</h3>
+<p>
+Badan antariksa Prancis yang terlibat
+dalam ilmu antariksa, peluncuran,
+observasi Bumi dan kerja sama internasional.
+</p>
+</div>
+
+<div class="card reveal">
+<div class="cardIcon">🇩🇪</div>
+<h3>DLR</h3>
+<p>
+Lembaga penelitian dirgantara Jerman
+yang melakukan riset penerbangan,
+antariksa dan berbagai teknologi.
+</p>
+</div>
+
+<div class="card reveal">
+<div class="cardIcon">🇦🇺</div>
+<h3>Australian Space Agency</h3>
+<p>
+Lembaga nasional Australia yang
+mengoordinasikan dan mengembangkan
+sektor serta aktivitas antariksa Australia.
+</p>
+</div>
+
+<div class="card reveal">
+<div class="cardIcon">🇨🇦</div>
+<h3>CSA</h3>
+<p>
+Canadian Space Agency.
+Kanada memiliki kontribusi pada
+robotik, satelit, ilmu antariksa
+dan program stasiun antariksa.
+</p>
+</div>
+
+<div class="card reveal">
+<div class="cardIcon">🇮🇩</div>
+<h3>Indonesia</h3>
+<p>
+Indonesia memiliki kegiatan penelitian
+dan pengembangan terkait antariksa,
+penginderaan jauh, observasi Bumi
+dan teknologi melalui ekosistem riset nasional.
+</p>
+</div>
+
+</div>
+
+</section>
+
+
+<!-- =========================================================
+     TELESCOPES
+     ========================================================= -->
+
+<section>
+
+<div class="sectionTitle reveal">
+
+<div class="number">12 — TELESCOPES</div>
+
+<h2>Teleskop & Observatorium</h2>
+
+<p>
+Mata manusia diperluas menggunakan teknologi.
+</p>
+
+</div>
+
+<div class="article reveal">
+
+<h3>Apa itu teleskop?</h3>
+
+<p>
+Teleskop adalah instrumen yang mengumpulkan
+dan menganalisis cahaya atau bentuk radiasi
+elektromagnetik dari objek jauh.
+</p>
+
+<h3>Teleskop optik</h3>
+
+<p>
+Mengamati cahaya tampak. Teleskop optik dapat
+menggunakan lensa, cermin atau kombinasi sistem optik.
+</p>
+
+<h3>Teleskop radio</h3>
+
+<p>
+Mengamati gelombang radio. Dengan teleskop radio,
+astronom dapat mempelajari objek dan fenomena
+yang tidak terlihat jelas dalam cahaya tampak.
+</p>
+
+<h3>Hubble Space Telescope</h3>
+
+<p>
+Hubble adalah observatorium luar angkasa terkenal
+yang telah menghasilkan banyak pengamatan astronomi
+dan gambar alam semesta yang sangat ikonik.
+</p>
+
+<h3>James Webb Space Telescope</h3>
+
+<p>
+James Webb dirancang terutama untuk pengamatan
+inframerah. Kemampuannya memungkinkan penelitian
+tentang galaksi awal, pembentukan bintang,
+atmosfer exoplanet dan objek lainnya.
+</p>
+
+</div>
+
+</section>
+
+
+<!-- =========================================================
+     COSMIC OBJECTS
+     ========================================================= -->
+
+<section id="lainnya">
+
+<div class="sectionTitle reveal">
+
+<div class="number">13 — COSMIC OBJECTS</div>
+
+<h2>Benda-Benda di Alam Semesta</h2>
+
+</div>
+
+<div class="grid">
+
+<div class="card reveal">
+<div class="cardIcon">☄️</div>
+<h3>Komet</h3>
+<p>
+Objek kaya es, debu dan material volatil
+yang mengorbit Matahari. Ketika mendekati
+Matahari, komet dapat membentuk koma dan ekor.
+</p>
+</div>
+
+<div class="card reveal">
+<div class="cardIcon">🪨</div>
+<h3>Asteroid</h3>
+<p>
+Objek kecil Tata Surya yang sebagian besar
+tersusun dari batu dan logam.
+</p>
+</div>
+
+<div class="card reveal">
+<div class="cardIcon">🌫️</div>
+<h3>Nebula</h3>
+<p>
+Awan gas dan debu di ruang antarbintang.
+Sebagian nebula berkaitan dengan pembentukan
+bintang atau sisa evolusi bintang.
+</p>
+</div>
+
+<div class="card reveal">
+<div class="cardIcon">⭐</div>
+<h3>Neutron Star</h3>
+<p>
+Sisa sangat padat dari beberapa ledakan
+bintang masif. Materinya berada dalam kondisi
+yang sangat ekstrem.
+</p>
+</div>
+
+<div class="card reveal">
+<div class="cardIcon">💥</div>
+<h3>Supernova</h3>
+<p>
+Ledakan atau peristiwa akhir yang sangat
+energetik pada jenis bintang tertentu.
+</p>
+</div>
+
+<div class="card reveal">
+<div class="cardIcon">🌑</div>
+<h3>Exoplanet</h3>
+<p>
+Planet yang mengorbit bintang selain Matahari.
+Beberapa ditemukan menggunakan metode transit
+dan kecepatan radial.
+</p>
+</div>
+
+<div class="card reveal">
+<div class="cardIcon">🌀</div>
+<h3>Pulsar</h3>
+<p>
+Bintang neutron yang berputar dan menghasilkan
+pulsa radiasi yang dapat dideteksi secara periodik.
+</p>
+</div>
+
+<div class="card reveal">
+<div class="cardIcon">🌌</div>
+<h3>Quasar</h3>
+<p>
+Inti galaksi aktif yang sangat terang,
+didorong oleh materi yang jatuh menuju
+black hole supermasif.
+</p>
+</div>
+
+<div class="card reveal">
+<div class="cardIcon">🌫️</div>
+<h3>Dark Matter</h3>
+<p>
+Komponen yang tidak memancarkan cahaya seperti
+materi biasa tetapi pengaruh gravitasinya
+terlihat dalam berbagai pengamatan.
+</p>
+</div>
+
+<div class="card reveal">
+<div class="cardIcon">🌌</div>
+<h3>Dark Energy</h3>
+<p>
+Istilah untuk komponen yang digunakan untuk
+menjelaskan percepatan ekspansi alam semesta.
+Sifat fundamentalnya masih diteliti.
+</p>
+</div>
+
+</div>
+
+</section>
+
+
+<!-- =========================================================
+     COSMOLOGY
+     ========================================================= -->
+
+<section>
+
+<div class="sectionTitle reveal">
+
+<div class="number">14 — COSMOLOGY</div>
+
+<h2>Alam Semesta</h2>
+
+<p>
+Dari Big Bang hingga struktur kosmik terbesar.
+</p>
+
+</div>
+
+<div class="article reveal">
+
+<h3>Apa itu alam semesta?</h3>
+
+<p>
+Alam semesta mencakup ruang-waktu, materi,
+energi dan struktur fisik yang dapat kita pelajari.
+Dalam kosmologi modern, alam semesta diketahui
+mengalami ekspansi.
+</p>
+
+<h3>Big Bang</h3>
+
+<p>
+Model Big Bang menjelaskan bahwa alam semesta
+awal berada dalam keadaan sangat panas dan padat
+dan kemudian berkembang serta mendingin.
+Big Bang bukan sekadar ledakan biasa di satu titik
+dalam ruang; konsepnya berkaitan dengan ekspansi
+ruang itu sendiri.
+</p>
+
+<h3>Radiasi latar belakang kosmik</h3>
+
+<p>
+Cosmic Microwave Background atau CMB adalah
+radiasi elektromagnetik yang berasal dari alam semesta
+awal. Pengamatannya menjadi salah satu bukti penting
+dalam kosmologi modern.
+</p>
+
+<h3>Ekspansi alam semesta</h3>
+
+<p>
+Galaksi-galaksi pada skala besar menunjukkan pola
+yang konsisten dengan alam semesta yang mengembang.
+Pengamatan supernova tipe tertentu dan data kosmologi
+lain menunjukkan bahwa ekspansi tersebut mengalami
+percepatan.
+</p>
+
+</div>
+
+</section>
+
+
+<!-- =========================================================
+     SPACE MISSIONS
+     ========================================================= -->
+
+<section>
+
+<div class="sectionTitle reveal">
+
+<div class="number">15 — MISSIONS</div>
+
+<h2>Misi Antariksa Terkenal</h2>
+
+</div>
+
+<div class="grid">
+
+<div class="card reveal">
+<div class="cardIcon">🌕</div>
+<h3>Apollo</h3>
+<p>
+Program penerbangan berawak NASA yang
+membawa manusia ke Bulan.
+</p>
+</div>
+
+<div class="card reveal">
+<div class="cardIcon">🛰️</div>
+<h3>Voyager</h3>
+<p>
+Wahana yang mempelajari planet-planet luar
+dan melanjutkan perjalanan ke ruang antarbintang.
+</p>
+</div>
+
+<div class="card reveal">
+<div class="cardIcon">🔴</div>
+<h3>Mars Rovers</h3>
+<p>
+Berbagai rover mempelajari geologi, atmosfer,
+dan sejarah lingkungan Mars.
+</p>
+</div>
+
+<div class="card reveal">
+<div class="cardIcon">🪐</div>
+<h3>Cassini-Huygens</h3>
+<p>
+Mempelajari Saturnus, cincin dan bulan-bulannya
+secara sangat mendalam.
+</p>
+</div>
+
+<div class="card reveal">
+<div class="cardIcon">☄️</div>
+<h3>DART</h3>
+<p>
+Demonstrasi teknologi untuk menguji perubahan
+lintasan asteroid menggunakan tumbukan kinetik.
+</p>
+</div>
+
+<div class="card reveal">
+<div class="cardIcon">🌌</div>
+<h3>Euclid</h3>
+<p>
+Misi observasi kosmologi untuk mempelajari
+struktur skala besar alam semesta.
+</p>
+</div>
+
+</div>
+
+</section>
+
+
+<!-- =========================================================
+     TIMELINE
+     ========================================================= -->
+
+<section>
+
+<div class="sectionTitle reveal">
+
+<div class="number">16 — HISTORY</div>
+
+<h2>Sejarah Eksplorasi Antariksa</h2>
+
+</div>
+
+<div class="timeline">
+
+<div class="timelineItem reveal">
+<h3>Roket Awal</h3>
+<p>
+Perkembangan teknologi roket menjadi dasar
+bagi penerbangan antariksa modern.
+</p>
+</div>
+
+<div class="timelineItem reveal">
+<h3>Sputnik 1</h3>
+<p>
+Peluncuran satelit buatan Sputnik 1 pada 1957
+menjadi tonggak besar era antariksa.
+</p>
+</div>
+
+<div class="timelineItem reveal">
+<h3>Manusia ke Antariksa</h3>
+<p>
+Penerbangan manusia membuka tahap baru
+dalam eksplorasi ruang angkasa.
+</p>
+</div>
+
+<div class="timelineItem reveal">
+<h3>Apollo</h3>
+<p>
+Program Apollo membawa manusia ke permukaan Bulan.
+</p>
+</div>
+
+<div class="timelineItem reveal">
+<h3>Stasiun Antariksa</h3>
+<p>
+Stasiun antariksa memungkinkan eksperimen
+jangka panjang dalam lingkungan mikrogravitasi.
+</p>
+</div>
+
+<div class="timelineItem reveal">
+<h3>Era Eksplorasi Robotik</h3>
+<p>
+Wahana robotik telah mengunjungi planet,
+bulan, asteroid dan komet.
+</p>
+</div>
+
+<div class="timelineItem reveal">
+<h3>Era Observatorium Modern</h3>
+<p>
+Teleskop luar angkasa modern memperluas
+kemampuan manusia mengamati alam semesta.
+</p>
+</div>
+
+</div>
+
+</section>
+
+
+<!-- =========================================================
+     SEARCH
+     ========================================================= -->
+
+<section>
+
+<div class="sectionTitle reveal">
+
+<div class="number">17 — EXPLORE</div>
+
+<h2>Cari Materi DELTA WEB</h2>
+
+<p>
+Ketik kata seperti black hole, planet,
+roket, satelit atau galaksi.
+</p>
+
+</div>
+
+<div class="searchBox reveal">
+
+<input
+id="search"
+type="text"
+placeholder="🔎 Cari pengetahuan astronomi..."
+onkeyup="searchCards()"
+>
+
+</div>
+
+</section>
+
+
+<!-- =========================================================
+     FAQ
+     ========================================================= -->
+
+<section>
+
+<div class="sectionTitle reveal">
+
+<div class="number">18 — FAQ</div>
+
+<h2>Pertanyaan Astronomi</h2>
+
+</div>
+
+<div class="article reveal">
+
+<details>
+<summary>Apakah Bumi benar-benar mengorbit Matahari?</summary>
+<p>
+Ya. Bumi bergerak mengelilingi Matahari dalam orbit
+yang secara sederhana dapat digambarkan sebagai elips.
+</p>
+</details>
+
+<details>
+<summary>Apakah Matahari mengorbit sesuatu?</summary>
+<p>
+Ya. Matahari bersama seluruh Tata Surya bergerak
+mengelilingi pusat Bima Sakti.
+</p>
+</details>
+
+<details>
+<summary>Apakah Matahari akan menjadi black hole?</summary>
+<p>
+Tidak. Matahari tidak cukup masif untuk berakhir
+sebagai black hole melalui evolusi bintang normal.
+</p>
+</details>
+
+<details>
+<summary>Apakah ada planet di luar Tata Surya?</summary>
+<p>
+Ya. Planet yang mengorbit bintang lain disebut
+exoplanet, dan ribuan telah dikonfirmasi.
+</p>
+</details>
+
+<details>
+<summary>Apakah manusia bisa hidup di Mars?</summary>
+<p>
+Manusia belum memiliki koloni mandiri di Mars.
+Mars memiliki lingkungan yang sangat berbeda dari
+Bumi dan menghadirkan berbagai tantangan teknis,
+biologis dan keselamatan.
+</p>
+</details>
+
+<details>
+<summary>Apakah ruang angkasa benar-benar kosong?</summary>
+<p>
+Tidak sepenuhnya. Ruang antariksa mengandung
+partikel, plasma, debu, radiasi dan medan fisik
+meskipun kepadatannya sangat rendah di banyak wilayah.
+</p>
+</details>
+
+<details>
+<summary>Apa benda terbesar di alam semesta?</summary>
+<p>
+Pertanyaan tersebut bergantung pada apa yang dimaksud
+"benda". Struktur kosmik dapat mencapai ukuran yang
+sangat besar, tetapi tidak semuanya merupakan satu
+objek yang terikat gravitasi seperti planet atau bintang.
+</p>
+</details>
+
+</div>
+
+</section>
+
+
+<!-- =========================================================
+     COSMIC NUMBERS
+     ========================================================= -->
+
+<section>
+
+<div class="sectionTitle reveal">
+
+<div class="number">19 — COSMIC NUMBERS</div>
+
+<h2>Beberapa Angka Kosmik</h2>
+
+</div>
+
+<div class="stats">
+
+<div class="stat reveal">
+<strong>8</strong>
+<span>Planet utama Tata Surya</span>
+</div>
+
+<div class="stat reveal">
+<strong>1</strong>
+<span>Bintang pusat Tata Surya</span>
+</div>
+
+<div class="stat reveal">
+<strong>4,6 M</strong>
+<span>Perkiraan usia Tata Surya</span>
+</div>
+
+<div class="stat reveal">
+<strong>13,8 M</strong>
+<span>Perkiraan usia alam semesta</span>
+</div>
+
+</div>
+
+</section>
+
+
+<!-- =========================================================
+     FINAL
+     ========================================================= -->
+
+<section>
+
+<div class="quote reveal">
+
+<h2>
+Semesta terlalu luas
+untuk berhenti bertanya.
+</h2>
+
+<p>
+Dari butiran debu hingga galaksi,
+dari planet kecil hingga black hole,
+setiap objek di langit merupakan bagian
+dari cerita kosmik yang jauh lebih besar.
+</p>
+
+<br>
+
+<a href="#home" class="btn primary">
+🚀 KEMBALI KE AWAL
+</a>
+
+</div>
+
+</section>
+
+
+<!-- =========================================================
+     FINAL REFERENCES
+     ========================================================= -->
+
+<div class="referenceBox">
+
+<div class="referenceTrack">
+
+<div class="referenceItem">
+<span>NASA</span> Space Science
+</div>
+
+<div class="referenceItem">
+<span>ESA</span> Space Exploration
+</div>
+
+<div class="referenceItem">
+<span>JPL</span> Solar System
+</div>
+
+<div class="referenceItem">
+<span>EHT</span> Black Hole Research
+</div>
+
+<div class="referenceItem">
+<span>JAXA</span> Space Science
+</div>
+
+<div class="referenceItem">
+<span>ISRO</span> Space Technology
+</div>
+
+<div class="referenceItem">
+<span>DELTA WEB</span> Astronomy Knowledge
+</div>
+
+<div class="referenceItem">
+<span>NASA</span> Space Science
+</div>
+
+<div class="referenceItem">
+<span>ESA</span> Space Exploration
+</div>
+
+<div class="referenceItem">
+<span>JPL</span> Solar System
+</div>
+
+<div class="referenceItem">
+<span>EHT</span> Black Hole Research
+</div>
+
+<div class="referenceItem">
+<span>JAXA</span> Space Science
+</div>
+
+</div>
+
+</div>
+
+
+<!-- =========================================================
+     FOOTER
+     ========================================================= -->
+
+<footer>
+
+<div class="logo">
+DELTA WEB
+</div>
+
+<p>
+ENSIKLOPEDIA ASTRONOMI • ANTARIKSA • SAINS • TEKNOLOGI
+</p>
+
+<br>
+
+<p>
+Belajar lebih jauh.
+Bertanya lebih banyak.
+Menjelajah lebih jauh.
+</p>
+
+<br>
+
+<p>
+© <span id="year"></span> DELTA WEB
+</p>
+
+</footer>
+
+
+<button id="topBtn" onclick="window.scrollTo(0,0)">
+↑
+</button>
+
+
+<script>
+
+/* =========================================================
+   MOBILE MENU
+   ========================================================= */
+
+function toggleMenu(){
+
+    document
+    .getElementById("navMenu")
+    .classList
+    .toggle("active");
+
+}
+
+document
+.querySelectorAll("nav a")
+.forEach(link=>{
+
+    link.addEventListener("click",()=>{
+
+        document
+        .getElementById("navMenu")
+        .classList
+        .remove("active");
+
+    });
+
+});
+
+
+/* =========================================================
+   SCROLL REVEAL
+   ========================================================= */
+
+const revealElements =
+document.querySelectorAll(".reveal");
+
+const observer =
+new IntersectionObserver(
+
+entries=>{
+
+    entries.forEach(entry=>{
+
+        if(entry.isIntersecting){
+
+            entry.target.classList.add("show");
+
+        }
+
+    });
+
+},
+
+{
+    threshold:.08
+}
+
+);
+
+revealElements.forEach(el=>{
+    observer.observe(el);
+});
+
+
+/* =========================================================
+   TOP BUTTON
+   ========================================================= */
+
+const topButton =
+document.getElementById("topBtn");
+
+window.addEventListener("scroll",()=>{
+
+    if(window.scrollY>500){
+
+        topButton.style.display="block";
+
+    }else{
+
+        topButton.style.display="none";
+
+    }
+
+});
+
+
+/* =========================================================
+   YEAR
+   ========================================================= */
+
+document
+.getElementById("year")
+.textContent =
+new Date().getFullYear();
+
+
+/* =========================================================
+   SEARCH SYSTEM
+   ========================================================= */
+
+function searchCards(){
+
+    const query =
+    document
+    .getElementById("search")
+    .value
+    .toLowerCase()
+    .trim();
+
+    const cards =
+    document.querySelectorAll(".card");
+
+    cards.forEach(card=>{
+
+        const text =
+        card.innerText.toLowerCase();
+
+        if(
+            query === "" ||
+            text.includes(query)
+        ){
+
+            card.style.display="block";
+
+        }else{
+
+            card.style.display="none";
+
+        }
+
+    });
+
+}
+
+
+/* =========================================================
+   PARALLAX
+   ========================================================= */
+
+document.addEventListener(
+"mousemove",
+event=>{
+
+    const x =
+    (event.clientX /
+    window.innerWidth - .5) * 8;
+
+    const y =
+    (event.clientY /
+    window.innerHeight - .5) * 8;
+
+    document.body.style.backgroundPosition =
+    `${x}px ${y}px`;
+
+});
+
+
+/* =========================================================
+   PREVENT ACCIDENTAL SELECTION ON SOLAR MODEL
+   ========================================================= */
+
+document
+.querySelector(".solarSystem")
+.addEventListener(
+"contextmenu",
+e=>e.preventDefault()
+);
+
+</script>
+
+</body>
+</html>
